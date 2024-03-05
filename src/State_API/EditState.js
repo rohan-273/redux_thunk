@@ -21,8 +21,7 @@ export default function EditState() {
           Authorization: `Bearer ${loginStatus}`,
         },
       })
-      .then((res) => {
-        console.log(res, "resEdit");
+      .then((res) => {        
         navigate("/stateList");
       })
       .catch((err) => {
@@ -45,14 +44,14 @@ export default function EditState() {
           type="text"
           value={countryName}
           onChange={(e) => setCountryName(e.target.value)}
-          style={{border: "1px solid black"}}
+          style={{ border: "1px solid black" }}
         />
         <label>State Title</label>
         <input
           type="text"
           value={state}
           onChange={(e) => setState(e.target.value)}
-          style={{border: "1px solid black"}}
+          style={{ border: "1px solid black" }}
         />
         <button type="submit">Update</button>
       </form>

@@ -13,9 +13,8 @@ export default function State() {
       setProduct(item);
       return;
     }
-    
-    const filterBySearch = item?.filter((items) => {    
-      console.log(items, "items");
+
+    const filterBySearch = item?.filter((items) => {
       if (
         items._id?.toLowerCase().includes(e.target.value?.toLowerCase()) ||
         items.country?.toLowerCase().includes(e.target.value?.toLowerCase()) ||
@@ -36,7 +35,6 @@ export default function State() {
       })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res, "reslist");
           setItem(res.data.data);
           setProduct(res.data.data);
         }
@@ -53,7 +51,11 @@ export default function State() {
       </div>
       <div>
         <span>Search : </span>
-        <input type="search" style={{border: "1px solid black"}} onChange={(e) => handleSearchClick(e)} />
+        <input
+          type="search"
+          style={{ border: "1px solid black" }}
+          onChange={(e) => handleSearchClick(e)}
+        />
       </div>
       <table>
         <tr>

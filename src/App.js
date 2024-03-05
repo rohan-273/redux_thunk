@@ -9,18 +9,19 @@ import HomePage from "./HomePage";
 import Layout from "./Layout";
 
 function App() {
+  // The useSelector hook allows access to the state stored in a Redux store
   const { loginStatus } = useSelector((state) => state.login);
   return (
-    <div className="App">      
-        <Routes>
-          <Route element={loginStatus ? <Layout /> : <Navigate to={"/login"} />}>
-            <Route path="/" exact element={<HomePage />} />
-            <Route exact path='/stateList' element={<State />} />
-            <Route exact path='/addState' element={<AddState />} />
-            <Route exact path='/editState' element={<EditState />} />
-          </Route>
-          <Route path="/login" exact element={<Loginpage />} />
-        </Routes>      
+    <div className="App">
+      <Routes>
+        <Route element={loginStatus ? <Layout /> : <Navigate to={"/login"} />}>
+          <Route path="/" exact element={<HomePage />} />
+          <Route exact path="/stateList" element={<State />} />
+          <Route exact path="/addState" element={<AddState />} />
+          <Route exact path="/editState" element={<EditState />} />
+        </Route>
+        <Route path="/login" exact element={<Loginpage />} />
+      </Routes>
     </div>
   );
 }

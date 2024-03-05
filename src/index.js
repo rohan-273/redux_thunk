@@ -12,6 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      {/* PersistGate delays the rendering of your app's UI until your persisted state has been retrieved and saved to redux. */}
       <PersistGate persistor={persistor}>
         <BrowserRouter>
           <App />

@@ -22,7 +22,7 @@ export default function AddState() {
         },
       })
       .then((res) => {
-        if (res.status === 200) {          
+        if (res.status === 200) {
           navigate("/stateList");
         }
       })
@@ -36,7 +36,7 @@ export default function AddState() {
       <form onSubmit={handleSubmit}>
         <label>Country</label>
         <input
-          style={{border: "1px solid black"}}
+          style={{ border: "1px solid black" }}
           type="text"
           value={countryName}
           onChange={(e) => setCountryName(e.target.value)}
@@ -44,13 +44,13 @@ export default function AddState() {
 
         <label>State Title</label>
         <input
-          style={{border: "1px solid black"}}
+          style={{ border: "1px solid black" }}
           type="text"
           value={state}
           onChange={(e) => setState(e.target.value)}
         />
 
-        <button type="submit" >Save</button>
+        <button type="submit">Save</button>
       </form>
     </div>
   );
