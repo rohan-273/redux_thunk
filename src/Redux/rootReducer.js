@@ -5,6 +5,7 @@
 
 import { combineReducers } from "redux";
 import authReducer from "./Reducer/authReducer";
+import { stateReducer } from "./Reducer/stateReducer";
 
 // The resulting combined reducer calls every slice reducer any time an action is dispatched,
 // and gathers their results into a single state object.
@@ -12,6 +13,7 @@ import authReducer from "./Reducer/authReducer";
 // each managing their own slice of the state independently.
 const appReducer = combineReducers({
   login: authReducer,
+  state: stateReducer
 });
 
 const rootReducer = (state, action) => {

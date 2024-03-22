@@ -1,30 +1,38 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  stateEditFailure,
+  stateEditRequest,
+  stateEditSuccess,
+} from "../Redux/Action/stateAction";
 
 export default function EditState() {
-  const [countryName, setCountryName] = useState("");
-  const [state, setState] = useState("");
-
+  const { loginStatus } = useSelector((state) => state.login);  
   const location = useLocation();
   const navigate = useNavigate();
-  const { loginStatus } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+  
+  const [countryName, setCountryName] = useState("");
+  const [state, setState] = useState("");
 
   const handleUpdate = (e) => {
     e.preventDefault();
     let data = { country: countryName, stateTitle: state };
-
+    dispatch(stateEditRequest());
     axios
       .put(`http://localhost:3001/api/state/${location.state._id}`, data, {
         headers: {
           Authorization: `Bearer ${loginStatus}`,
         },
       })
-      .then((res) => {        
+      .then((res) => {
+        dispatch(stateEditSuccess(res.data.data));
         navigate("/stateList");
       })
       .catch((err) => {
+        dispatch(stateEditFailure(err));
         console.log(err);
       });
   };

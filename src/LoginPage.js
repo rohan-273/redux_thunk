@@ -2,7 +2,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginRequestSucess } from "./Redux/Action/authAction";
+import {
+  loginRequestAction,
+  loginRequestFail,
+  loginRequestSucess,
+} from "./Redux/Action/authAction";
 import axios from "axios";
 
 export default function Loginpage() {
@@ -13,16 +17,18 @@ export default function Loginpage() {
 
   function handleLogin(e) {
     e.preventDefault();
-    let data = { email: email, password: password };    
+    let data = { email: email, password: password };
+    dispatch(loginRequestAction());
     axios
       .post("http://localhost:3001/api/noAuth/users/login", data)
       .then((res) => {
-        if (res.status === 200) {          
+        if (res.status === 200) {
           navigate("/stateList");
-          dispatch(loginRequestSucess(res.data.data));
+          dispatch(loginRequestSucess(res.data.data));          
         }
       })
       .catch((err) => {
+        dispatch(loginRequestFail(err));
         console.log(err);
       });
   }

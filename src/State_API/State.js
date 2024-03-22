@@ -1,19 +1,24 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  stateListFailure,
+  stateListRequest,
+  stateListSuccess,
+} from "../Redux/Action/stateAction";
 
 export default function State() {
+  const dispatch = useDispatch();
   const [item, setItem] = useState([]);
   const [product, setProduct] = useState(item);
-  //   const token =
-  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjk4ZmExMGM5NDY4NGIwNTZjNjhjOCIsInRva2VuIjoiODIzMThiYmM2ODZkMDU3ZTM1YWQ5MWMxYTJlM2U4NzIiLCJpYXQiOjE2NDAyNjEwOTV9.geiKjS2vMeGGvTOe6aE9EohD4uPrXLZaFKe3bJUSczI";
+
   function handleSearchClick(e) {
     if (e.target.value === "") {
       setProduct(item);
       return;
     }
-
     const filterBySearch = item?.filter((items) => {
       if (
         items._id?.toLowerCase().includes(e.target.value?.toLowerCase()) ||
@@ -27,19 +32,18 @@ export default function State() {
   }
 
   useEffect(() => {
+    dispatch(stateListRequest());
     axios
-      .get(`http://localhost:3001/api/noAuth/state/?page=${1}&size=${100}`, {
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
-      })
+      .get(`http://localhost:3001/api/noAuth/state/?page=${1}&size=${100}`)
       .then((res) => {
         if (res.status === 200) {
+          dispatch(stateListSuccess(res.data.data));
           setItem(res.data.data);
           setProduct(res.data.data);
         }
       })
       .catch((err) => {
+        dispatch(stateListFailure(err));
         console.log(err);
       });
   }, []);

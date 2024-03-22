@@ -1,20 +1,25 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {
+  stateAddFailure,
+  stateAddRequest,
+  stateAddSuccess,
+} from "../Redux/Action/stateAction";
 
 export default function AddState() {
+  const { loginStatus } = useSelector((state) => state.login);
+  const navigate = useNavigate("");
+  const dispatch = useDispatch();
+
   const [countryName, setCountryName] = useState("");
   const [state, setState] = useState("");
-
-  const navigate = useNavigate("");
-
-  const { loginStatus } = useSelector((state) => state.login);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let data = { country: countryName, stateTitle: state };
-
+    dispatch(stateAddRequest());
     axios
       .post("http://localhost:3001/api/state/", data, {
         headers: {
@@ -23,10 +28,12 @@ export default function AddState() {
       })
       .then((res) => {
         if (res.status === 200) {
+          dispatch(stateAddSuccess(res.data.data));
           navigate("/stateList");
         }
       })
       .catch((err) => {
+        dispatch(stateAddFailure(err));
         console.log(err);
       });
   };

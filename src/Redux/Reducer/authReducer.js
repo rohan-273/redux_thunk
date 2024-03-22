@@ -3,13 +3,7 @@
 // So reducers are basically pure JS functions which take in the previous state and
 // an action and return the newly updated state.
 
-import {
-  LOGIN_REQUEST,
-  LOGIN_REQUEST_SUCESS,
-  LOGIN_REQUEST_FAIL,
-  LOGOUT_REQUEST,
-  LOGOUT_REQUEST_SUCESS,
-} from "../Constant/authConstant";
+import { authActionTypes } from "../Constant/authConstant";
 
 const initialState = {
   loading: false,
@@ -19,13 +13,13 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case authActionTypes.LOGIN_REQUEST:
       return {
         ...state,
         loading: true,
       };
 
-    case LOGIN_REQUEST_SUCESS:
+    case authActionTypes.LOGIN_REQUEST_SUCESS:
       return {
         ...state,
         loginStatus: action.payload,
@@ -33,7 +27,7 @@ const authReducer = (state = initialState, action) => {
         loading: false,
       };
 
-    case LOGIN_REQUEST_FAIL:
+    case authActionTypes.LOGIN_REQUEST_FAIL:
       return {
         ...state,
         loginStatus: false,
@@ -41,10 +35,10 @@ const authReducer = (state = initialState, action) => {
         loading: false,
       };
 
-    case LOGOUT_REQUEST:
+    case authActionTypes.LOGOUT_REQUEST:
       return { ...state, loading: true };
 
-    case LOGOUT_REQUEST_SUCESS:
+    case authActionTypes.LOGOUT_REQUEST_SUCESS:
       return {
         ...state,
         loginStatus: false,
