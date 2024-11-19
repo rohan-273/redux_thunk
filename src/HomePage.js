@@ -7,8 +7,8 @@ import { loginRequestFail } from "./Redux/Action/authAction";
 export default function HomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  function handleLogin() {
-    navigate("/login");
+  function handleLogout() {
+    navigate("/login");    
     dispatch(loginRequestFail());
   }
   return (
@@ -16,7 +16,7 @@ export default function HomePage() {
       <Link
         className="navbar-brand "
         onClick={() => {
-          handleLogin();
+          handleLogout();
         }}
       >
         Logout

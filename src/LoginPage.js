@@ -34,9 +34,9 @@ export default function Loginpage() {
   }
   return (
     <div className="center">
-      <div>
+      {/* <div>
         <h1>SwachhBharat </h1>
-      </div>
+      </div> */}
       <form className="container " onSubmit={handleLogin}>
         <div className="mb-3">
           <label className="form-label">Email address</label>

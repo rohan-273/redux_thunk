@@ -5,7 +5,6 @@ import AddState from "./State_API/AddState";
 import EditState from "./State_API/EditState";
 import { useSelector } from "react-redux";
 import Loginpage from "./LoginPage";
-import HomePage from "./HomePage";
 import Layout from "./Layout";
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route element={loginStatus ? <Layout /> : <Navigate to={"/login"} />}>
-          <Route path="/" exact element={<HomePage />} />
+          <Route path="/" />
           <Route exact path="/stateList" element={<State />} />
           <Route exact path="/addState" element={<AddState />} />
           <Route exact path="/editState" element={<EditState />} />
